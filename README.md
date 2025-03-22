@@ -112,5 +112,5 @@ npm install
 npm run dev
 ```
 
-Now, access the application at `http://localhost:3000`.
+Now, access the application at `http://localhost:5173`.
 
