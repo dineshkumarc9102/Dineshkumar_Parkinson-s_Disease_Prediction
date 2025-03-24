@@ -55,16 +55,16 @@ function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+    <div className="min-h-screen flex items-center justify-center mt-10 bg-gray-100 p-4">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">
+        <h2 className=" text-md lg:text-2xl font-bold mt-2 mb-4 text-center text-gray-800">
           Parkinson’s Diagnosis Prediction
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {Object.keys(formData).map((key) => (
             <div key={key}>
-              <label className="block text-gray-700 font-medium">{key}</label>
+              <label className="block text-gray-700 text-sm lg:text-lg font-medium">{key}</label>
               <input
                 type="number"
                 name={key}
