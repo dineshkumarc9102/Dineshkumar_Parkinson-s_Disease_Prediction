@@ -1,7 +1,8 @@
 import History from '../models/history-model.js';
 
 export const addHistory = async (req, res) => {
-  const { symptoms, result, probability } = req.body;
+  
+  const { symptoms, result, probability, stage  } = req.body;
 
   try {
     // Validate request
@@ -14,7 +15,7 @@ export const addHistory = async (req, res) => {
 
     // Create new history record
     const newHistory = new History({
-      userId, // Ensure this is included
+      userId, 
       patientId,
       fullName,
       symptoms: {
@@ -26,6 +27,7 @@ export const addHistory = async (req, res) => {
       },
       result,
       probability,
+      stage, 
     });
 
     // Save to database

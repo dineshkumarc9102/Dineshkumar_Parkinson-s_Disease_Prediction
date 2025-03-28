@@ -21,8 +21,9 @@ export const useHistoryStore = create((set) => ({
     }
   },
 
-  addHistory: async (token, symptoms, prediction, probability) => {
+  addHistory: async (token, symptoms, prediction, probability, stage) => {
     set({ loading: true, error: null });
+    
     try {
       const response = await axiosInstance.post(
         '/history/add-history',
@@ -30,6 +31,7 @@ export const useHistoryStore = create((set) => ({
           symptoms,
           result: prediction === 1 ? 'Affected' : 'Not Affected',
           probability,
+          stage,
         },
         {
           headers: {
@@ -40,11 +42,11 @@ export const useHistoryStore = create((set) => ({
       );
 
       set((state) => ({ history: [response.data.data, ...state.history] }));
-      toast.success('Diagnosis saved successfully');
+      toast.success('Data saved successfully in history');
     } catch (error) {
       console.error('Error saving history:', error.response?.data || error.message);
-      set({ error: error.response?.data?.message || 'Failed to save history', loading: false });
-      toast.error('Failed to save history');
+      set({ error: error.response?.data?.message || 'Failed to save data in history', loading: false });
+      toast.error('Failed to save data in history');
     }
   },
 }));

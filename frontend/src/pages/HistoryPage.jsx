@@ -37,6 +37,7 @@ const HistoryPage = () => {
                 <th className="p-2 sm:p-3 border xl:table-cell">Rigidity</th>
                 <th className="p-2 sm:p-3 border">Result</th>
                 <th className="p-2 sm:p-3 border">Probability</th>
+                <th className="p-2 sm:p-3 border">Stage</th>
                 <th className="p-2 sm:p-3 border">Date & Time</th>
               </tr>
             </thead>
@@ -61,16 +62,11 @@ const HistoryPage = () => {
                   <td className="p-2 sm:p-3 border xl:table-cell">
                     {record.symptoms?.Rigidity !== undefined ? record.symptoms.Rigidity : '-'}
                   </td>
-                  <td
-                    className={`p-2 sm:p-3 border font-bold ${
-                      record.result.toLowerCase() === 'not affected' ? 'text-green-600' : 'text-red-600'
-                    }`}
-                  >
+                  <td className={`p-2 sm:p-3 border font-bold ${record.result.toLowerCase() === 'not affected' ? 'text-green-600' : 'text-red-600'}`}>
                     {record.result}
                   </td>
-                  <td className="p-2 sm:p-3 border">
-                    {(record.probability * 100).toFixed(2)}%
-                  </td>
+                  <td className="p-2 sm:p-3 border">{(record.probability * 100).toFixed(2)}%</td>
+                  <td className="p-2 sm:p-3 border">{record.stage}</td>
                   <td className="p-2 sm:p-3 border whitespace-nowrap">
                     {new Date(record.date).toLocaleDateString('en-GB', {
                       day: '2-digit',
@@ -82,6 +78,8 @@ const HistoryPage = () => {
                 </tr>
               ))}
             </tbody>
+
+
           </table>
         </div>
       )}

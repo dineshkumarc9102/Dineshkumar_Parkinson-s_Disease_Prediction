@@ -17,6 +17,24 @@ function HomePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Function to determine Parkinson’s stage
+  function determineParkinsonStage(probability) {
+    const probPercentage = probability * 100;
+    if (probPercentage >= 10 && probPercentage < 20) {
+      return "1: Mild symptoms, minimal impact on daily life.";
+    } else if (probPercentage >= 20 && probPercentage < 40) {
+      return "2: Moderate symptoms, affecting both sides of the body, but balance remains unaffected.";
+    } else if (probPercentage >= 40 && probPercentage < 60) {
+      return "3: Significant symptoms with balance issues and slowed movements.";
+    } else if (probPercentage >= 60 && probPercentage < 80) {
+      return "4: Severe symptoms, requiring assistance for movement and daily tasks.";
+    } else if (probPercentage >= 80) {
+      return "5: Most advanced stage, requiring full-time assistance with mobility and daily activities.";
+    } else {
+      return "No significant symptoms detected.";
+    }
+  }
+
 
   // Handle input changes
   const handleChange = (e) => {
@@ -43,10 +61,16 @@ function HomePage() {
       const data = await response.json();
       if (data.error) throw new Error(data.error);
 
-      setResult({ prediction: data.prediction, probability: data.probability });
+      const stage = determineParkinsonStage(data.probability);
+
+      setResult({
+        prediction: data.prediction,
+        probability: data.probability,
+        stage: stage,
+      });
 
       // Save to history
-      await addHistory(authUser.token, formData, data.prediction, data.probability);
+      await addHistory(authUser.token, formData, data.prediction, data.probability, stage);
     } catch (err) {
       setError(err.message || 'Something went wrong!');
     } finally {
@@ -57,7 +81,7 @@ function HomePage() {
   return (
     <div className="min-h-screen flex items-center justify-center mt-10 bg-gray-100 p-4">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className=" text-md lg:text-2xl font-bold mt-2 mb-4 text-center text-gray-800">
+        <h2 className="text-md lg:text-2xl font-bold mt-2 mb-4 text-center text-gray-800">
           Parkinson’s Diagnosis Prediction
         </h2>
 
@@ -91,6 +115,7 @@ function HomePage() {
             <strong>Error:</strong> {error}
           </div>
         )}
+
         {result && (
           <div
             className={`mt-4 text-center p-3 rounded ${result.prediction === 1 ? "bg-red-100 text-red-800" : "bg-green-100 text-green-800"
@@ -101,7 +126,15 @@ function HomePage() {
               {result.prediction === 1 ? "Affected" : "Not Affected"}
             </span>
             <br />
-            <strong>Probability:</strong> {(result.probability * 100).toFixed(2)}%
+
+            {/* Show Probability and Stage only if the patient is affected */}
+            {result.prediction === 1 && (
+              <>
+                <strong>Probability:</strong> {(result.probability * 100).toFixed(2)}%
+                <br />
+                <strong>Stage:</strong> {result.stage}
+              </>
+            )}
           </div>
         )}
 

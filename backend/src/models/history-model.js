@@ -29,7 +29,11 @@ const historySchema = new mongoose.Schema(
         probability: {
             type: Number,
             required: true,
-          },
+        },
+        stage: {
+            type: String,
+            required: true,
+        },
         date: {
             type: Date,
             default: Date.now,
