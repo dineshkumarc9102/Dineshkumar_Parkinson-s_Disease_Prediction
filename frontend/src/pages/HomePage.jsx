@@ -20,20 +20,22 @@ function HomePage() {
   // Function to determine Parkinson’s stage
   function determineParkinsonStage(probability) {
     const probPercentage = probability * 100;
-    if (probPercentage >= 10 && probPercentage < 20) {
-      return "1: Mild symptoms, minimal impact on daily life.";
-    } else if (probPercentage >= 20 && probPercentage < 40) {
-      return "2: Moderate symptoms, affecting both sides of the body, but balance remains unaffected.";
-    } else if (probPercentage >= 40 && probPercentage < 60) {
-      return "3: Significant symptoms with balance issues and slowed movements.";
-    } else if (probPercentage >= 60 && probPercentage < 80) {
-      return "4: Severe symptoms, requiring assistance for movement and daily tasks.";
-    } else if (probPercentage >= 80) {
-      return "5: Most advanced stage, requiring full-time assistance with mobility and daily activities.";
+    if (probPercentage >= 35 && probPercentage < 45) {
+      return "Stage 1: Mild symptoms, typically affecting one side of the body with minimal impact on daily life.";
+    } else if (probPercentage >= 45 && probPercentage < 55) {
+      return "Stage 2: Moderate symptoms affecting both sides of the body, balance is generally not affected.";
+    } else if (probPercentage >= 55 && probPercentage < 65) {
+      return "Stage 3: Significant symptoms with balance problems, difficulty in movement, and risk of falls.";
+    } else if (probPercentage >= 65 && probPercentage < 85) {
+      return "Stage 4: Severe symptoms, requiring assistance with daily activities and limited ability to walk.";
+    } else if (probPercentage >= 85) {
+      return "Stage 5: Advanced stage, full-time assistance needed, may be bedridden or wheelchair-bound.";
     } else {
       return "No significant symptoms detected.";
     }
   }
+  
+  
 
 
   // Handle input changes
