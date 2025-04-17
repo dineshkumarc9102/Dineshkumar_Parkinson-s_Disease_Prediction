@@ -34,8 +34,8 @@ function HomePage() {
       return "No significant symptoms detected.";
     }
   }
-  
-  
+
+
 
 
   // Handle input changes
@@ -99,6 +99,8 @@ function HomePage() {
                 className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
                 required
                 step="any"
+                min="0"
+                max="100"
               />
             </div>
           ))}

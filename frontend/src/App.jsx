@@ -27,14 +27,12 @@ const App = () => {
   return (
     <div data-theme="dark">
       <Navbar />
-
       <Routes>
         <Route path='/' element={authUser ? <HomePage /> : <Navigate to="/login" />} />
         <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
         <Route path='/user-history' element={authUser ? <HistoryPage /> : <Navigate to="/login" />} />
       </Routes>
-
       <Toaster
         position="top-center"
         toastOptions={{ duration: 3000 }}

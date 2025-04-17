@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 const historySchema = new mongoose.Schema(
     {
         userId: {
@@ -45,3 +44,4 @@ const historySchema = new mongoose.Schema(
 const History = mongoose.model('History', historySchema);
 
 export default History;
+
